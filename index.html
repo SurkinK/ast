@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Shower Presentation Engine</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="shower/themes/ribbon/styles/styles.css">
+    <style>
+        .shower {
+            --slide-ratio: calc(16 / 9);
+        }
+
+        .white {
+            color: white !important;
+        }
+
+        .slide-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo {
+            width: 360px;
+            height: 140px;
+            background-image: url('http://eaist-demo1.proitr.ru/components/logo/default_large.svg');
+            background-size: 360px 140px;
+        }
+
+        .mark-green {
+            background-color: #a4eba4 !important;
+        }
+
+        .regexp-img {
+            position: absolute;
+            background-image: url('https://i.imgur.com/UsCGlOJ.png');
+            top: 240px;
+            right: 40px;
+            width: 310px;
+            height: 250px;
+            background-size: 310px 250px;
+        }
+
+        .regexp-code {
+            position: absolute;
+            top: 200px;
+            right: 200px;
+            word-break: break-all;
+            z-index: 1;
+            width: 120px;
+            font-size: 12px;
+            background: white;
+            padding: 20px;
+            border: 1px solid black;
+            border-radius: 20px;
+        }
+
+        .regexp-bg {
+            background-image: url('https://i.imgur.com/VJ5I31w.png');
+            background-size: cover;
+        }
+
+        .lexical {
+            width: 930px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            height: 410px;
+            position: absolute;
+            top: 140px;
+            left: 60px;
+        }
+
+        .lexical-1 {
+            background-image: url('./img/lexical1.png');
+        }
+
+        .lexical-2 {
+            background-image: url('./img/lexical2.png');
+        }
+
+        .lexical-3 {
+            background-image: url('./img/lexical3.png');
+        }
+
+        .lexical-4 {
+            background-image: url('./img/lexical4.png');
+        }
+
+        .lexical-5 {
+            background-image: url('./img/lexical5.png');
+        }
+
+        .tree {
+            background-image: url('./img/tree.jpg');
+            width: 540px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            height: 410px;
+            position: absolute;
+            top: 290px;
+            left: 430px;
+        }
+
+        .syntax {
+            width: 930px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            height: 410px;
+            position: absolute;
+            top: 140px;
+            left: 60px;
+        }
+
+        .syntax1-1 {
+            background-image: url('./img/syntax1-1.png');
+        }
+
+        .syntax1-2 {
+            background-image: url('./img/syntax1-2.png');
+        }
+
+        .syntax1-3 {
+            background-image: url('./img/syntax1-3.png');
+        }
+
+        .syntax2-1 {
+            background-image: url('./img/syntax2-1.png');
+        }
+
+        .syntax2-2 {
+            background-image: url('./img/syntax2-2.png');
+        }
+
+        .syntax2-3 {
+            background-image: url('./img/syntax2-3.png');
+        }
+
+        .syntax-all {
+            background-image: url('./img/tree-all.png');
+            width: 910px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            height: 550px;
+            position: absolute;
+            top: 10px;
+            left: 60px;
+        }
+
+        .syntax-shape {
+            background: var(--color-yellow);
+            position: absolute;
+            z-index: -1;
+        }
+
+        .syntax-shape-1 {
+            width: 100vw;
+            height: 180px;
+            left: 0;
+            bottom: 0;
+        }
+
+        .syntax-shape-2 {
+            width: 200px;
+            height: 43px;
+            top: 17px;
+            left: 409px;
+        }
+
+        .syntax-shape-3 {
+            width: 143px;
+            height: 43px;
+            top: 17px;
+            left: 698px;
+        }
+
+        .syntax-shape-4 {
+            width: 32px;
+            height: 43px;
+            top: 17px;
+            left: 638px;
+        }
+
+        .syntax-shape-5 {
+            width: 360px;
+            height: 201px;
+            top: 309px;
+            left: 331px;
+        }
+
+        .syntax-shape-6 {
+            left: 0;
+            width: 100vw;
+            height: 181px;
+            top: 214px;
+        }
+
+        .syntax-shape-7 {
+            width: 595px;
+            height: 43px;
+            top: 17px;
+            left: 242px;
+        }
+
+        .syntax-shape-8 {
+            left: 0;
+            width: 100vw;
+            height: 90px;
+            top: 127px;
+        }
+        
+        .syntax-shape-9 {
+            width: 768px;
+            height: 43px;
+            top: 17px;
+            left: 70px;
+        }
+
+        .syntax-tree-numbers-1 {
+            background-image: url('./img/tree-numbers-1.png');
+            width: 600px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            height: 550px;
+            position: absolute;
+            top: 100px;
+            left: 420px;
+        }
+
+        .syntax-tree-numbers-2 {
+            background-image: url('./img/tree-numbers-2.png');
+            width: 600px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            height: 550px;
+            position: absolute;
+            top: 100px;
+            left: 420px;
+        }
+
+        .lists {
+            width: 830px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            height: 550px;
+            position: absolute;
+            top: 140px;
+            left: 100px;
+        }
+
+        .lists1 {
+            background-image: url('./img/lists1.png');
+        }
+
+        .lists2 {
+            background-image: url('./img/lists2.png');
+        }
+
+        .user-input {
+            width: 830px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            height: 550px;
+            position: absolute;
+            top: 180px;
+            left: 100px;
+        }
+
+        .user-input-1 {
+            background-image: url('./img/user-input-1.png');
+        }
+
+        .user-input-2 {
+            background-image: url('./img/user-input-2.png');
+        }
+
+        .user-input-3 {
+            background-image: url('./img/user-input-3.png');
+        }
+
+        .template {
+            background-image: url('./img/template.png');
+            width: 830px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            height: 550px;
+            position: absolute;
+            top: 180px;
+            left: 100px;
+        }
+
+        .dark-blue {
+            color: #2555B3 !important;
+        }
+
+        .blue {
+            color: #4FC1FF !important;
+        }
+
+        .light-blue {
+            color: #9CDCFE !important;
+        }
+
+        .orange {
+            color: #E69C1F !important;
+        }
+
+        .yellow {
+            color: #DCDC8B !important;
+        }
+
+        .white {
+            color: white;
+        }
+
+        .reducer {
+            background-image: url('./img/reducer.png');
+            width: 830px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            height: 550px;
+            position: absolute;
+            top: 300px;
+            left: 100px;
+        }
+
+        .small-list {
+            font-size: 20px;
+        }
+
+        .shape-generate {
+            width: 710px;
+            height: 7px;
+            background: #c00;
+            position: absolute;
+            left: 150px;
+            top: 305px;
+            z-index: -1;
+        }
+
+        .gen {
+            width: 830px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            height: 550px;
+            position: absolute;
+            top: 160px;
+            left: 100px;
+        }
+
+        .gen1 {
+            background-image: url('./img/gen1.png');
+        }
+
+        .gen2 {
+            background-image: url('./img/gen2.png');
+        }
+
+        .gen3 {
+            background-image: url('./img/gen3.png');
+        }
+
+        .gen4 {
+            background-image: url('./img/gen4.png');
+        }
+
+        .gen5 {
+            background-image: url('./img/gen5.png');
+        }
+
+        .gen6 {
+            background-image: url('./img/gen6.png');
+        }
+
+        .gen7 {
+            background-image: url('./img/gen7.png');
+        }
+
+        .gen8 {
+            background-image: url('./img/gen8.png');
+        }
+
+        .gen9 {
+            background-image: url('./img/gen9.png');
+        }
+
+        .gen10 {
+            background-image: url('./img/gen10.png');
+        }
+
+        .gen11 {
+            background-image: url('./img/gen11.png');
+        }
+
+        .gen12 {
+            background-image: url('./img/gen12.png');
+        }
+
+        .gen13 {
+            background-image: url('./img/gen13.png');
+        }
+
+        .gen-action {
+            top: 220px;
+        }
+
+        .gen14 {
+            background-image: url('./img/gen14.png');
+        }
+
+        .gen15 {
+            background-image: url('./img/gen15.png');
+        }
+
+        .gen16 {
+            background-image: url('./img/gen16.png');
+        }
+
+        .gen17 {
+            background-image: url('./img/gen17.png');
+            height: 390px;
+        }
+    </style>
+</head>
+<body class="shower list">
+
+    <header class="caption">
+        <h1>Abstract Syntax Tree</h1>
+    </header>
+
+    <section class="slide">
+        <h2 class="shout">
+            Абстрактное синтаксическое дерево (AST)
+        </h2>
+    </section>
+
+    <section class="slide">
+        <h2>Задача - проверка использования console.log</h2>
+        <pre>
+            <code>() => {</code>
+            <code><mark class="important">    console.log('done');</mark></code>
+            <code>}</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Задача - проверка использования console.log</h2>
+        <pre>
+            <code>() => {</code>
+            <code><mark class="important">    console.log('done');</mark></code>
+            <code>    <mark>console <span class="comment">//console.log('done')</span></mark></code>
+            <code>    <mark>    .log('done');</mark></code>
+            <code>}</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Задача - проверка использования console.log</h2>
+        <pre>
+            <code>() => {</code>
+            <code><mark class="important">    console.log('done');</mark></code>
+            <code>    <mark>console <span class="comment">//console.log('done')</span></mark></code>
+            <code>    <mark>    .log('done');</mark></code>
+            <code>    <mark class="mark-green">const logger = console;</mark></code>
+            <code>    <mark class="mark-green">logger.log();</mark></code>
+            <code>}</code>
+        </pre>
+        <div class="regexp-code">
+            code.replace(/\/\/.*|`.*?[^\\]`|».*?»|`[\s\S]*`|\/\*[\s\S]*\*\//).match(/\bconsole\s*.log\(/)
+        </div>
+        <div class="regexp-img"></div>
+    </section>
+
+    <section class="slide">
+        <h2>
+            Абстрактное синтаксическое дерево
+        </h2>
+
+        <pre>
+            <code>const fn = function (obj) {</code>
+            <code>    const exp = calc(2) + obj.x;</mark></code>
+            <code>    return exp + 100;</span></mark></code>
+            <code>}</code>
+        </pre>
+
+        <div class="tree"></div>
+    </section>
+
+    <section class="slide">
+        <h2>
+            Абстрактное синтаксическое дерево
+        </h2>
+
+        <pre>
+            <code>const fn = function (obj) {</code>
+            <code class="mark">    const exp = calc(2) + obj.x;</mark></code>
+            <code>    return exp + 100;</span></mark></code>
+            <code>}</code>
+        </pre>
+
+        <div class="tree"></div>
+    </section>
+
+    <section class="slide">
+        <h2>
+            1. Лексический анализ
+        </h2>
+        <div class="lexical lexical-1"></div>
+    </section>
+
+    <section class="slide">
+        <h2>
+            1. Лексический анализ
+        </h2>
+        <div class="lexical lexical-2"></div>
+    </section>
+
+    <section class="slide">
+        <h2>
+            1. Лексический анализ
+        </h2>
+        <div class="lexical lexical-3"></div>
+    </section>
+
+    <section class="slide">
+        <h2>
+            1. Лексический анализ
+        </h2>
+        <div class="lexical lexical-4"></div>
+    </section>
+
+    <section class="slide">
+        <h2>
+            1. Лексический анализ
+        </h2>
+        <div class="lexical lexical-5"></div>
+    </section>
+
+    <section class="slide">
+        <h2>
+            1. Лексический анализ
+        </h2>
+        <div class="lexical lexical-5"></div>
+        <div class="spotlight" style="
+            --spotlight-radius: 0;
+            --spotlight-opacity: 0.5;
+            --spotlight-width: 174px;
+            --spotlight-height: 50px;
+            --spotlight-top: 53px;
+            --spotlight-left: 378px;
+        "></div>
+    </section>
+
+    <section class="slide">
+        <h2>
+            2. Синтаксический анализ
+        </h2>
+        <div class="syntax syntax1-1"></div>
+    </section>
+
+    <section class="slide">
+        <h2>
+            2. Синтаксический анализ
+        </h2>
+        <div class="syntax syntax1-2"></div>
+    </section>
+
+    <section class="slide">
+        <h2>
+            2. Синтаксический анализ
+        </h2>
+        <div class="syntax syntax1-3"></div>
+    </section>
+
+    <section class="slide">
+        <h2>
+            2. Синтаксический анализ
+        </h2>
+        <div class="syntax syntax2-1"></div>
+    </section>
+
+    <section class="slide">
+        <h2>
+            2. Синтаксический анализ
+        </h2>
+        <div class="syntax syntax2-2"></div>
+    </section>
+
+    <section class="slide">
+        <h2>
+            2. Синтаксический анализ
+        </h2>
+        <div class="syntax syntax2-3"></div>
+    </section>
+
+    <section class="slide">
+        <div class="syntax syntax-all"></div>
+    </section>
+
+    <section class="slide">
+        <div class="syntax syntax-all"></div>
+        <div class="syntax-shape syntax-shape-1"></div>
+        <div class="syntax-shape syntax-shape-2"></div>
+        <div class="syntax-shape syntax-shape-3"></div>
+    </section>
+
+    <section class="slide">
+        <div class="syntax syntax-all"></div>
+        <div class="syntax-shape syntax-shape-1"></div>
+        <div class="syntax-shape syntax-shape-2"></div>
+        <div class="syntax-shape syntax-shape-3"></div>
+        <div class="syntax-shape syntax-shape-4"></div>
+        <div class="syntax-shape syntax-shape-5"></div>
+    </section>
+
+    <section class="slide">
+        <div class="syntax syntax-all"></div>
+        <div class="syntax-shape syntax-shape-6"></div>
+        <div class="syntax-shape syntax-shape-7"></div>
+    </section>
+
+    <section class="slide">
+        <div class="syntax syntax-all"></div>
+        <div class="syntax-shape syntax-shape-8"></div>
+        <div class="syntax-shape syntax-shape-9"></div>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout">
+            <a href="https://astexplorer.net/#/gist/76ec7b443b0ca67bf99bc51909d628c0/48e02c023559d42561d7193d060126dc45c9ab44" target="_blank">Демо</a>
+        </h2>
+    </section>
+
+    <section class="slide">
+        <h2>
+            3. Обход дерева
+        </h2>
+        <div class="syntax syntax-tree-numbers-1"></div>
+    </section>
+
+    <section class="slide">
+        <h2>
+            3. Обход дерева
+        </h2>
+        <pre>
+            <code>visitor: {</code>
+            <code>  CallExpression(node) {</code>
+            <code>  <span class="comment">  //do something</span></code>
+            <code>  }</code>
+            <code>}</code>
+        </pre>
+        <div class="syntax syntax-tree-numbers-2"></div>
+    </section>
+
+    <section class="slide">
+        <h2>
+            4. Манипуляции с деревом
+        </h2>
+        <ol>
+            <li>Считать свойства с ноды</li>
+            <li>Сгенерировать новую ноду</li>
+            <li>Заменить ноду на другую</li>
+            <li>Вставить ноду до/после</li>
+            <li>Сгенерировать новый идентификатор на основании скоупа</li>
+            <li>Удалить ноду</li>
+            <li>...</li>
+        </ol>
+    </section>
+
+    <section class="slide">
+        <h2>
+            Основные задачи на базе AST
+        </h2>
+        <ol>
+            <li>Проверка кода - <a href="https://astexplorer.net/#/gist/cf0723c3d4875af2b187ceaabd96f483/8fe364e922860e0648fc51fbf1619e0392a66780" target="_blank">ESLint</a>, <a href="https://astexplorer.net/#/gist/5ea0432422754aca18c69fb5c841d197/8777ddc112448f59acb89ca52fdfeb1badc7e8b7" target="_blank">ESLint fix</a></li>
+            <li>Модификация, транспиляция кода - <a href="https://astexplorer.net/#/gist/3e47191ac3ccc61e2707e23a25e2e12a/7bd98e9070db7c479b343fde2c0ce1703f337edc" target="_blank">Babel RegExp</a></li>
+            <li>Рефакторинг (codemods) - <a href="https://astexplorer.net/#/gist/3adf2fa24b3f85e4672ee4171b58f70e/82a529d26f24fd995a550aabf9d8cb508a3fb1b6" target="_blank">jQuery .hide</a></li>
+        </ol>
+    </section>
+
+    <section class="slide">
+        <h2>
+            Узкие задачи на базе AST
+        </h2>
+        <ol>
+            <li>Кодогенерация</li>
+            <li>Удаление мертвого кода (пример - css классы)</li>
+            <li>Артефакты (пример - генерирование документации)</li>
+            <li>Авто кодревью</li>
+            <li>Оптимизации, минификации</li>
+            <li>...</li>
+        </ol>
+    </section>
+
+    <section class="slide regexp-bg">
+    </section>
+
+    <section class="slide">
+       <h2 class="shout">
+            ???
+        </h2>
+    </section> 
+
+    <section class="slide black">
+        <h2 class="shout white">
+            <div class="slide-header">
+                <div class="logo"></div>
+                cli generate
+            </div>
+        </h2>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            Задача
+        </h2>
+        <div class="lists lists1"></div>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            Задача
+        </h2>
+        <div class="lists lists2"></div>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            1. Пользовательский ввод
+        </h2>
+        <div class="user-input user-input-1"></div>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            1. Пользовательский ввод
+        </h2>
+        <div class="user-input user-input-2"></div>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            1. Пользовательский ввод
+        </h2>
+        <div class="user-input user-input-3"></div>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            2. Шаблонизатор
+        </h2>
+        <div class="template"></div>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            3. AST
+        </h2>
+        <h2 class="shout">
+            <a href="https://astexplorer.net/#/gist/29aac629375ecabec7aacaf4fe761640/a9230a149686c60a38eb24e4aa23d8aa9b9b02f5" target="_blank">Демо Reducer</a>
+        </h2>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            3. AST
+        </h2>
+        <pre class="white">
+            <code>const <span class="yellow">Reducer</span> = new <span class="yellow">Reducer</span>(reducerPath);</code>
+            <code>const <span class="yellow">Action</span> = new <span class="yellow">Action</span>(actionPath);</code>
+            <code><span class="yellow">Reducer</span>.add(Action);</code>
+        </pre>
+        <div class="reducer"></div>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            3. AST
+        </h2>
+        <ol class="white">
+            <li><span class="yellow">@babel/core</span></li>
+            <li><span class="yellow">@babel/traverse</span> - обход</li>
+            <li><span class="yellow">@babel/types</span> - генерирование, проверка node</li>
+            <li><span class="yellow">@babel/template</span> - генерирование шаблонов node</li>
+            <li><span class="yellow">recast</span> - сохранение форматирования</li>
+        </ol>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            Пример генерации
+        </h2>
+        <ol class="white">
+            <li>Глобальная установка <span class="yellow">npm i -g @dots-java/eaist-cli</span></li>
+        </ol>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            Пример генерации
+        </h2>
+        <ol class="white">
+            <li>Глобальная установка <span class="yellow">npm i -g @dots-java/eaist-cli</span></li>
+            <li>Выбор команды 
+                <ol>
+                    <li><span class="yellow">eaist-cli generate app</span> - генерация приложения (карточка/список)</li>
+                    <li><span class="yellow">eaist-cli generate action</span> - генерация экшена (set, update, fetch)</li>
+                    <li><span class="yellow">eaist-cli generate block</span> - генерация блока (пустой, area, таблица, раскрывающаяся таблица)</li>
+                </ol>
+            </li>
+        </ol>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            Пример генерации
+        </h2>
+        <ol class="white">
+            <li>Глобальная установка <span class="yellow">npm i -g @dots-java/eaist-cli</span></li>
+            <li>Выбор команды 
+                <ol>
+                    <li><span class="yellow">eaist-cli generate app</span> - генерация приложения (карточка/список)</li>
+                    <li><span class="yellow">eaist-cli generate action</span> - генерация экшена (set, update, fetch)</li>
+                    <li><span class="yellow">eaist-cli generate block</span> - генерация блока (пустой, area, таблица, раскрывающаяся таблица)</li>
+                </ol>
+            </li>
+        </ol>
+        <div class="shape-generate"></div>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            Пример генерации списка
+        </h2>
+        <div class="gen gen1"></div>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            Пример генерации списка
+        </h2>
+        <div class="gen gen2"></div>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            Пример генерации списка
+        </h2>
+        <div class="gen gen3"></div>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            Пример генерации списка
+        </h2>
+        <div class="gen gen4"></div>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            Пример генерации списка
+        </h2>
+        <div class="gen gen5"></div>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            Пример генерации списка
+        </h2>
+        <div class="gen gen6"></div>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            Пример генерации списка
+        </h2>
+        <div class="gen gen7"></div>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            Пример генерации списка
+        </h2>
+        <div class="gen gen8"></div>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            Пример генерации списка
+        </h2>
+        <div class="gen gen9"></div>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            Пример генерации списка
+        </h2>
+        <div class="gen gen10"></div>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            Пример генерации списка
+        </h2>
+        <div class="gen gen11"></div>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            Пример генерации списка
+        </h2>
+        <div class="gen gen12"></div>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            Пример генерации списка
+        </h2>
+        <div class="gen gen13"></div>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            Пример генерации экшена
+        </h2>
+        <ol>
+            <li><span class="yellow">eaist-cli generate action</span></li>
+            <li></li>
+        </ol>
+        <div class="gen gen-action gen14"></div>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            Пример генерации экшена
+        </h2>
+        <ol>
+            <li><span class="yellow">eaist-cli generate action</span></li>
+            <li></li>
+        </ol>
+        <div class="gen gen-action gen15"></div>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            Пример генерации экшена
+        </h2>
+        <ol>
+            <li><span class="yellow">eaist-cli generate action</span></li>
+            <li></li>
+        </ol>
+        <div class="gen gen-action gen16"></div>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            Пример генерации экшена
+        </h2>
+        <div class="gen gen17"></div>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            Преимущества
+        </h2>
+        <ol class="white">
+            <li>⏲️ Скорость</li>
+            <li>📝 Возможность быстро менять шаблоны</li>
+        </ol>
+    </section>
+
+    <section class="slide black">
+        <h2 class="shout">
+            <a href="https://vcs.proitr.ru/dots-java/node-packages/-/tree/master/cli" target="_blank">Документация</a>
+        </h2>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            Roadmap
+        </h2>
+        <ol class="white small-list">
+            <li>✔️ Генерация <span class="yellow">приложения</span> (список/карточка)</li>
+            <li>✔️ Генерация <span class="yellow">экшенов</span> (set, update, fetch)</li>
+            <li>🕐 Генерация <span class="yellow">блоков</span> (пустой, area, таблица, раскрывающаяся таблица)</li>
+            <li>❓ Генерация <span class="yellow">компонентов</span> (селект, модалка, useModal и т.п.)</li>
+            <li>❓ Генерация <span class="yellow">тестов</span></li>
+            <li>❓ Генерация <span class="yellow">модуля</span></li>
+            <li>❓ Генерация <span class="yellow">веб-компонентов/виджетов</span></li>
+            <li>❓ Обновление <span class="yellow">редюсера</span></li>
+            <li>👽 Кастомные правила <span class="yellow">ESLint </span></li>
+            <li>👽 <span class="yellow">Watch mode</span></li>
+        </ol>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            Интересный факт
+        </h2>
+        <ul>
+            <li class="white">Часть процесса добавления новой функциональности в EcmaScript - <span class="yellow">создание плагина для Babel</span></li>
+        </ul>
+    </section>
+
+    <section class="slide black">
+        <h2 class="white">
+            Future = UI?
+        </h2>
+        <ol class="white">
+            <li>Leroy Merlin</li>
+            <li>Tinkoff</li>
+        </ol>
+    </section>
+
+    <section class="slide black">
+       <h2 class="shout white">
+            Вопросы, предложения, идеи?
+        </h2>
+    </section>
+
+    <section class="slide black">
+       <h2 class="shout white">
+            🎉 The End
+        </h2>
+    </section>
+
+    <footer class="badge">
+        <a href="https://vcs.proitr.ru/dots-java/node-packages/-/tree/master/cli">eaist-cli</a>
+    </footer>
+
+    <div class="progress"></div>
+
+    <script src="shower/shower.js"></script>
+    <!-- Copyright © 2021 Yours Truly, Famous Inc. -->
+
+</body>
+</html>
